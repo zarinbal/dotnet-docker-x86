@@ -24,6 +24,7 @@ RUN powershell -Command `
         `
         mkdir ${env:ProgramFiles(x86)}\dotnet; `
         tar -oxzf dotnet.zip -C ${env:ProgramFiles(x86)}\dotnet; `
-        Remove-Item -Force dotnet.zip
+        Remove-Item -Force dotnet.zip; `
+        New-Item -ItemType SymbolicLink -Path ${env:ProgramFiles}\dotnet -Target ${env:ProgramFiles(x86)}\dotnet; 
 
 RUN setx /M PATH "%PATH%;C:\Program Files (x86)\dotnet"
